@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>https://consults.dk/</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/"/>
-  </url>
-  <url>
-    <loc>https://consults.dk/en/</loc>
-    <lastmod>2026-09-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/"/>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://consults.dk/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/"/></url>
+  <url><loc>https://consults.dk/en/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/"/></url>
+  <url><loc>https://consults.dk/plc-programmering/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/plc-programmering/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/plc-programming/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/plc-programmering/"/></url>
+  <url><loc>https://consults.dk/en/plc-programming/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/plc-programmering/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/plc-programming/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/plc-programmering/"/></url>
+  <url><loc>https://consults.dk/hmi-scada/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/hmi-scada/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/hmi-scada/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/hmi-scada/"/></url>
+  <url><loc>https://consults.dk/en/hmi-scada/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/hmi-scada/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/hmi-scada/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/hmi-scada/"/></url>
+  <url><loc>https://consults.dk/plc-fejlfinding/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/plc-fejlfinding/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/plc-troubleshooting/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/plc-fejlfinding/"/></url>
+  <url><loc>https://consults.dk/en/plc-troubleshooting/</loc><lastmod>2026-10-23</lastmod><xhtml:link rel="alternate" hreflang="da" href="https://consults.dk/plc-fejlfinding/"/><xhtml:link rel="alternate" hreflang="en" href="https://consults.dk/en/plc-troubleshooting/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://consults.dk/plc-fejlfinding/"/></url>
 </urlset>

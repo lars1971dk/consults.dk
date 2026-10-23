@@ -272,6 +272,7 @@ section{padding:68px 0}
 .svc li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--petrol);flex:none;position:relative;top:-1px}
 @media(max-width:880px){.services{grid-template-columns:1fr}}
 
+.svc-more{display:flex;flex-wrap:wrap;gap:9px 17px;padding-top:10px;margin-top:auto;border-top:1px solid var(--petrol-line)}.svc-more a{font-weight:800;font-size:14px;text-decoration:none}.svc-more a:hover{text-decoration:underline}
 /* ---------- Billed-pladsholdere ---------- */
 .ph{
   position:relative;background:var(--paper);
@@ -727,7 +728,7 @@ header .wrap{max-width:1240px}
     <div class="hero-copy">
       <span class="label">Freelance automation · Herning</span>
       <h1>PLC-, HMI- og robotsoftware. <em>Freelance, når I har brug for det.</em></h1>
-      <p class="lede">CONSULTS tilbyder erfaren freelance-assistance til udvikling og optimering af PLC-, HMI- og SCADA-løsninger. Du har direkte kontakt med den specialist, der udvikler løsningen, fra den indledende gennemgang og programmering til idriftsættelse og stabil drift.</p>
+      <p class="lede">CONSULTS tilbyder erfaren freelance-assistance til udvikling og optimering af PLC-, HMI- og SCADA-løsninger. Du har direkte kontakt med den specialist, der udvikler løsningen, fra den indledende gennemgang og programmering til idriftsættelse og stabil drift. Vi arbejder primært i Danmark og kan indgå i internationale projekter efter aftale.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary btn-arrow" href="#kontakt">Book en uforpligtende gennemgang</a>
         <a class="btn btn-ghost" href="tel:+4570273700">Ring +45 70 27 37 00</a>
@@ -944,10 +945,11 @@ header .wrap{max-width:1240px}
         <h3>Automation</h3>
         <p>Kompetent assistance til programmering af avancerede PLC-, HMI- og robotløsninger. Nyudvikling, ombygninger og fejlfinding i eksisterende anlæg.</p>
         <ul>
-          <li>PLC-software, blandt andet Siemens og Beckhoff</li>
+          <li>PLC-software med Siemens TIA Portal og Beckhoff TwinCAT</li>
           <li>HMI- og SCADA-flader, operatørerne forstår</li>
           <li>Robotprogrammering og integration i den samlede styring</li>
         </ul>
+        <div class="svc-more"><a href="/plc-programmering/">PLC-programmering →</a><a href="/hmi-scada/">HMI &amp; SCADA / WinCC →</a></div>
       </div>
       <div class="svc reveal" style="--d:.1s">
         <div class="svc-fig"><svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Mono', monospace" role="img" aria-label="Diagram: spredte datapunkter samles til en graf med tydelig tendens">
@@ -1005,6 +1007,7 @@ header .wrap{max-width:1240px}
           <li>Fjernopkobling først, fremmøde når det er nødvendigt</li>
           <li>Fejlrapport, så samme stop ikke rammer igen</li>
         </ul>
+        <div class="svc-more"><a href="/plc-fejlfinding/">PLC-fejlfinding og support →</a></div>
       </div>
     </div>
   </div>
