@@ -23,3 +23,20 @@ Opdateret: 23. oktober 2026.
 
 ## Målepunkter (hver måned)
 Søgevisninger, ikke-brandede klik, kvalificerede henvendelser, samtaler og nye opgaver. Spørg nye kunder om kilden. Søgevolumen og afkast skal verificeres i data og må ikke opfindes.
+
+## Søgeordskort – én primær søgeintention pr. side
+
+| URL | Primær søgeintention | Sekundære udtryk |
+| --- | --- | --- |
+| `/` | PLC-konsulent, freelance PLC-programmering | Automation konsulent, Siemens, Herning, HMI |
+| `/plc-programmering/` | Siemens PLC-programmering, freelance PLC-konsulent | TIA Portal konsulent, S7-1200/1500, Beckhoff TwinCAT |
+| `/hmi-scada/` | HMI-programmering, Siemens WinCC | SCADA-udvikling, operatørflader, alarmer |
+| `/plc-fejlfinding/` | PLC-fejlfinding, Siemens PLC-support | TIA Portal fejlfinding, idriftsættelse, Beckhoff |
+| `/en/` | Freelance PLC programmer Denmark | HMI consultant, automation, WinCC |
+| `/en/plc-programming/` | Siemens PLC programming, TIA Portal consultant | Beckhoff TwinCAT, commissioning |
+| `/en/hmi-scada/` | HMI programming, Siemens WinCC development | SCADA, alarms, recipes |
+| `/en/plc-troubleshooting/` | PLC troubleshooting, Siemens S7 support | Beckhoff, commissioning |
+
+Prioriteterne er baseret på kommerciel relevans og ikke dokumenterede søgevolumener. Brug faglige formuleringer naturligt frem for at gentage søgeord mekanisk.
+
+**Efter publicering:** Kontrollér faktiske søgninger og klik pr. URL i Google Search Console. Sammenhold med kvalificerede henvendelser og justér efter data.
