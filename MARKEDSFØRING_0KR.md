@@ -1,42 +1,39 @@
-# CONSULTS – organisk markedsføring uden annoncebudget
-Opdateret: 23. oktober 2026.
+# CONSULTS.dk – organisk markedsføring uden annoncebudget
+Opdateret: 24. oktober 2026.
 
-## Teknisk gennemført i branch
-- Tre nye dansksprogede servicesider med særskilt SEO-titel og relevant teknisk indhold: PLC-programmering, HMI/SCADA, PLC-fejlfinding.
-- Tre tilsvarende engelsksprogede sider, hreflang, canonical, Service-schema og interne links.
-- Links til de nye sider fra begge forsider og hinanden, samt opdateret sitemap til otte adresser.
-- Teknologierne Siemens TIA Portal og Beckhoff TwinCAT fremhævet på forsiden.
+## Udført i GitHub
+- Danish/English homepage with unique search titles, descriptions, canonical URLs, hreflang, robots.txt and ProfessionalService data.
+- Three bilingual service-page pairs covering PLC programming, HMI/SCADA and troubleshooting.
+- Two bilingual expert-oriented practical guides about preparing a PLC project and managing WinCC alarms/recipes.
+- Two index pages: `/viden/` and `/en/insights/`; homepage navigation and all service pages link to the relevant guides.
+- Sitemap expanded from 8 to 14 canonical URLs (7 Danish + 7 English), with reciprocal language references.
+- Email enquiry has a mailto draft AND a manual copy fallback. It does not send data directly from a server.
+- A simulated, randomly increasing production counter on the homepage illustration has been removed and marked as illustrative.
+- Existing Google Search Console: site owner reports sitemap status **Succes** on 24 October 2026. The detailed indexing/performance report is still pending.
 
-## Ejerens næste gratis opgaver
-1. Gennemgå og publicér PR efter kontrol af stavning, påstande, desktop og mobil.
-2. Verificér `consults.dk` i Google Search Console og indsend `https://consults.dk/sitemap.xml`; kontroller indeksering og søgefraser.
-3. Opdatér personlig LinkedIn-profil og virksomhedsside: freelance PLC/HMI, Siemens TIA Portal, WinCC, Beckhoff, commissioning, Danmark og udland efter aftale.
-4. Opret eller opdatér Google Business Profile, hvis virksomheden opfylder kravet om fysisk kundekontakt; brug korrekt serviceområde.
-5. Publicér to anonymiserede tekniske projektcases efter kundens godkendelse. Undgå kundekode, produktionsdata eller udokumenterede besparelsestal.
-6. Kontaktformularen er fortsat mailto-baseret: Besøgende skal sende via eget e-mailprogram. Vurder sikker GDPR-kompatibel gratis formularbackend inden direkte webindsendelse indføres.
+## Search intent map (relevance hypotheses, not validated search volumes)
+| Destination | Primary intent |
+| --- | --- |
+| `/` | freelance PLC-konsulent, PLC-programmering |
+| `/plc-programmering/` | Siemens PLC-programmering, TIA Portal freelance |
+| `/hmi-scada/` | HMI-programmering, WinCC |
+| `/plc-fejlfinding/` | Siemens PLC-support, PLC-fejlfinding |
+| `/viden/forbered-plc-opgave/` | forbered PLC-projekt, tjekliste PLC-konsulent |
+| `/viden/wincc-alarmer/` | WinCC-alarmer, HMI alarmtekster, recepter |
+| English versions | freelance PLC programmer Denmark, Siemens TIA Portal engineer, WinCC HMI consultant |
 
-## 4 ugers organisk indholdsplan
-- Uge 1: Kontrol og lancering af sider, Search Console, mobil- og kontaktflowtest.
-- Uge 2: Teknisk guide – ”5 kontroller før ændringer i et eksisterende TIA Portal-projekt”. Del essensen på LinkedIn.
-- Uge 3: Anonymiseret case – ”Systematisk fejlfinding på en PLC-styret produktionslinje”. Del 1-2 faglige læringer på LinkedIn.
-- Uge 4: Guide – ”HMI-alarmtekster, der faktisk hjælper operatøren”. Besvar tekniske spørgsmål i relevante LinkedIn-netværk.
+## Kvalitetskrav
+- Ingen offentlige kundecases uden særskilt tilladelse og faktisk dokumentation.
+- Ingen opfundne produktionsbesparelser, testimonials eller live-telemetri.
+- Ingen ukontrollerede API-nøgler, betalt SEO-platform eller marketingtracking cookies.
+- Ved publicering af tekniske guides: vurder at eksempler ikke kan misforstås som instruktioner til usikre ændringer på kørende anlæg.
 
-## Målepunkter (hver måned)
-Søgevisninger, ikke-brandede klik, kvalificerede henvendelser, samtaler og nye opgaver. Spørg nye kunder om kilden. Søgevolumen og afkast skal verificeres i data og må ikke opfindes.
+## Næste gratis opgaver
+1. Google Search Console: når der er data, kontroller antallet af indekserede URL'er, søgeforespørgsler, klik og sider med fejl. Der er ikke behov for gentagne, uændrede sitemap-indsendelser.
+2. LinkedIn: optimer personlig profil og virksomhedsside med specialerne Siemens TIA Portal, WinCC, Beckhoff, PLC-fejlfinding og idriftsættelse.
+3. Offentliggør højst to faglige opslag pr. måned til at begynde med – med link til relevant guide, når det hjælper læseren.
+4. Indsæt anonymiserede kundecases, hvis projekterne er godkendt og resultaterne dokumenterbare.
+5. Vurdér en sikker direkte kontaktformular senere, hvis den statiske mailto-løsning ikke skaber nok henvendelser. En egentlig indsendelsesbackend kræver en valgt e-mailleverandør og sikker konfiguration.
 
-## Søgeordskort – én primær søgeintention pr. side
-
-| URL | Primær søgeintention | Sekundære udtryk |
-| --- | --- | --- |
-| `/` | PLC-konsulent, freelance PLC-programmering | Automation konsulent, Siemens, Herning, HMI |
-| `/plc-programmering/` | Siemens PLC-programmering, freelance PLC-konsulent | TIA Portal konsulent, S7-1200/1500, Beckhoff TwinCAT |
-| `/hmi-scada/` | HMI-programmering, Siemens WinCC | SCADA-udvikling, operatørflader, alarmer |
-| `/plc-fejlfinding/` | PLC-fejlfinding, Siemens PLC-support | TIA Portal fejlfinding, idriftsættelse, Beckhoff |
-| `/en/` | Freelance PLC programmer Denmark | HMI consultant, automation, WinCC |
-| `/en/plc-programming/` | Siemens PLC programming, TIA Portal consultant | Beckhoff TwinCAT, commissioning |
-| `/en/hmi-scada/` | HMI programming, Siemens WinCC development | SCADA, alarms, recipes |
-| `/en/plc-troubleshooting/` | PLC troubleshooting, Siemens S7 support | Beckhoff, commissioning |
-
-Prioriteterne er baseret på kommerciel relevans og ikke dokumenterede søgevolumener. Brug faglige formuleringer naturligt frem for at gentage søgeord mekanisk.
-
-**Efter publicering:** Kontrollér faktiske søgninger og klik pr. URL i Google Search Console. Sammenhold med kvalificerede henvendelser og justér efter data.
+## Måling
+Registrér søgevisninger, ikke-brandede klik og kvalificerede kundehenvendelser månedligt. Sammenhold Google-søgninger med henvendelser og afsluttede salg. Søgeplaceringer og afkast er ikke garanteret.
