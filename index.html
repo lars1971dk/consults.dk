@@ -384,6 +384,15 @@ form .btn-light{border:none;cursor:pointer;font-family:inherit;justify-self:star
 
 .form-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.form-copy{background:transparent;border:1px solid #91a5c8;border-radius:7px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;padding:12px 16px;cursor:pointer}.form-copy:hover{background:rgba(255,255,255,.09)}.form-status{font-size:13px;color:#cfe2ff;min-height:0}.form-status:empty{display:none}
 
+/* Customer-requested optional email copy: original layout preserved */
+.form-copy-optin{margin:8px 0 14px}
+.form-copy-optin .copy-choice{display:inline-flex;gap:12px;align-items:flex-start;cursor:pointer;margin:0;font-size:14px;line-height:1.45;color:#fff;font-weight:650}
+.form-copy-optin .copy-choice input[type="checkbox"]{appearance:auto;flex:0 0 auto;width:18px;height:18px;padding:0;margin:2px 0 0;accent-color:#ed651c;cursor:pointer;border:0}
+.form-copy-optin .copy-choice span{display:block}
+.form-copy-optin .copy-detail{margin:5px 0 0 30px;font-size:12.5px;line-height:1.5;color:#becce5}
+.form-copy-optin input:focus-visible{outline:2px solid #ed651c;outline-offset:3px}
+.form-status:not(:empty){display:block;padding:12px 15px;border-left:3px solid #ed651c;background:rgba(255,255,255,.06);line-height:1.55}
+
 /* ---------- Motion & moderne detaljer ---------- */
 section[id],#kontakt{scroll-margin-top:112px}
 
@@ -1210,10 +1219,17 @@ header .wrap{max-width:1240px}
           <label for="besked">Beskriv opgaven *</label>
           <textarea id="besked" name="besked" minlength="10" maxlength="2500" required placeholder="Vælg et emne ovenfor for at få en starttekst, eller skriv frit. Platform, anlægstype og hvad der skal løses er en god start."></textarea>
         </div>
+<div class="form-copy-optin">
+          <label for="copyToSender" class="copy-choice">
+            <input id="copyToSender" name="copyToSender" type="checkbox" value="yes">
+            <span>Send mig en kopi af min forespørgsel på e-mail</span>
+          </label>
+          <p class="copy-detail">Valgfrit. Kopien sendes til den e-mailadresse, du har indtastet ovenfor.</p>
+        </div>
         <div class="form-actions"><button class="btn btn-light" type="submit">Send forespørgsel</button>
  <button class="form-copy" type="button" onclick="copyEnquiry(this.form)">Kopiér henvendelse</button></div>
  <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-        <p class="form-note">Forespørgslen sendes via vores eksisterende kontaktservice. Hvis afsendelsen fejler, kan I kopiere teksten eller skrive til info@consults.dk. Send ikke adgangskoder eller fortrolige PLC-projektfiler.</p>
+        <p class="form-note">CONSULTS bruger oplysningerne til at besvare din henvendelse og, kun hvis du vælger det, til at sende dig en kopi. Send ikke adgangskoder eller fortrolige projektfiler. Ved fejl kan du bruge Kopiér henvendelse eller skrive til info@consults.dk.</p>
       </form>
     </div>
   </div>
@@ -1344,7 +1360,8 @@ async function submitEnquiry(f) {
    emne: String(d.get('emne')||'').trim(),
    besked: String(d.get('besked')||'').trim(),
    website: String(d.get('website')||'').trim(),
-   lang: 'da'
+   lang: 'da',
+   copyToSender: d.get('copyToSender') === 'yes'
   };
   const response = await fetch(CONTACT_API_URL, {
    method:'POST',headers:{'Content-Type':'application/json'},
@@ -1353,11 +1370,18 @@ async function submitEnquiry(f) {
   if (!response.ok) throw new Error('Request failed');
   const result = await response.json();
   if (result.ok !== true) throw new Error('Delivery not confirmed');
-  status.textContent = 'Tak! Jeres forespørgsel er sendt til CONSULTS.';
-  status.style.color = '#9be7b8';
-  f.reset();
-  document.querySelectorAll('.topic.sel').forEach(b=>b.classList.remove('sel'));
-  document.getElementById('emne').value = '';
+  if (payload.copyToSender && result.copySent !== true) {
+    status.textContent = 'Din forespørgsel er sendt til CONSULTS, men e-mailkopien kunne ikke leveres. Du kan stadig bruge Kopiér henvendelse herunder.';
+    status.style.color = '#ffe1a9';
+  } else {
+    status.textContent = payload.copyToSender
+      ? 'Tak! Din forespørgsel er sendt til CONSULTS, og en kopi er sendt til din e-mail.'
+      : 'Tak! Din forespørgsel er sendt til CONSULTS.';
+    status.style.color = '#9be7b8';
+    f.reset();
+    document.querySelectorAll('.topic.sel').forEach(b=>b.classList.remove('sel'));
+    document.getElementById('emne').value = '';
+  }
  } catch (_) {
   status.textContent = 'Vi kunne ikke bekræfte afsendelsen. Brug Kopiér henvendelse, eller skriv direkte til info@consults.dk.';
   status.style.color = '#ffd1c8';
