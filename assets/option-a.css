@@ -1,0 +1,89 @@
+/* CONSULTS homepage · Option A, 24 Oct 2026
+   Light, left-aligned industrial hero and stronger existing logo.
+   External stylesheet placed AFTER the original inline CSS for safe overrides. */
+:root{--hero-ink:#0b1630}
+header{background:linear-gradient(110deg,#0d203e 0%,#0b1328 68%,#121829 100%);border-bottom:1px solid #2a3750}
+header .wrap{max-width:1560px}
+.nav{height:110px;grid-template-columns:minmax(275px,1fr) auto auto;gap:20px}
+.logo,header.scrolled .brand .logo{height:78px;width:auto}
+.nav-main ul{gap:clamp(12px,1.25vw,23px)}
+.nav-main a{font-size:14px;color:#e5ebf7}
+.nav-actions{gap:15px}
+.nav-cta{box-shadow:0 6px 16px rgba(0,0,0,.12)}
+header.scrolled .nav{height:92px}
+
+@media(min-width:1121px){
+ .hero{position:relative;overflow:hidden;padding:0;background:#fff}
+ .hero>.wrap{max-width:1540px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:0;align-items:stretch;text-align:left;min-height:690px;padding-left:32px;padding-right:0}
+ .hero .hero-copy{max-width:790px;align-self:center;margin:0;position:relative;z-index:3;padding:72px 16px 72px 0}
+ .hero .label{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.15em}
+ .hero .label::before{content:"";width:28px;height:3px;background:var(--amber);flex:none}
+ .hero h1{font-size:clamp(35px,2.65vw,49px);line-height:1.16;max-width:790px;margin:22px 0 29px;color:var(--hero-ink)}
+ .hero .lede{max-width:69ch;font-size:17px;line-height:1.75;margin:0 10px 32px 0;color:#566271}
+ .hero-ctas{justify-content:flex-start;gap:12px}
+ .hero-ctas .btn{font-size:15px;padding:15px 22px}
+ .trust-line{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:start;gap:14px;margin:42px 0 0;padding:24px 0 0;border-top:1px solid #dce1e9;max-width:770px}
+ .trust-item{min-width:0}
+ .trust-item b{font-size:15px;color:#192a47}
+ .trust-item span{font-size:11.5px;color:#667080}
+ .hero .hero-fig{position:relative;max-width:none;min-width:0;margin:0 -6vw 0 -36px;align-self:stretch;z-index:1;display:flex;align-items:stretch}
+ .hero .shot-annotated{width:100%;height:100%;border:0;border-radius:0;background:#fff;box-shadow:none;overflow:hidden}
+ .hero .shot-annotated img{width:100%;height:100%;min-height:690px;aspect-ratio:auto;object-fit:cover;object-position:53% center;filter:saturate(.90) contrast(1.06) brightness(1.12)}
+ .hero .shot-annotated::before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.94) 5%,rgba(255,255,255,.44) 25%,rgba(255,255,255,0) 56%)}
+ .hero .shot-annotated::after{display:none}
+ .hero .anno,.hero .shot-annotated figcaption{display:none}
+}
+@media(min-width:1121px) and (max-width:1460px){
+ .hero>.wrap{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+ .hero .hero-copy{padding-right:8px}
+ .hero h1{font-size:clamp(34px,3vw,44px)}
+ .hero .lede{font-size:16px}
+ .trust-line{gap:9px}
+ .trust-item b{font-size:14px}
+}
+@media(max-width:1340px) and (min-width:1081px){
+ .logo,header.scrolled .brand .logo{height:68px}
+ .nav{gap:12px}
+ .nav-main ul{gap:14px}
+ .nav-main a{font-size:13px}
+ .nav-actions{gap:11px}
+ .nav-cta{padding:11px 15px;font-size:13px}
+ .nav-phone{font-size:12.5px}
+}
+@media(max-width:1120px){
+ .hero{background:linear-gradient(#fff 0%,#fff 45%,#f1f5fb 100%)}
+ .hero .hero-copy{max-width:850px}
+ .hero .shot-annotated figcaption{font-size:12px}
+}
+@media(max-width:1080px){
+ .nav,header.scrolled .nav{height:80px}
+ .logo,header.scrolled .brand .logo{height:57px}
+}
+@media(max-width:720px){
+ .hero{padding:35px 0 48px}
+ .hero h1{font-size:clamp(29px,7.9vw,41px)}
+ .hero .lede{max-width:65ch}
+ .hero-fig{margin-top:28px}
+ .hero .shot-annotated img{filter:saturate(.95) contrast(1.02)}
+}
+@media(max-width:560px){
+ .nav,header.scrolled .nav{height:72px}
+ .logo,header.scrolled .brand .logo{height:48px}
+ .hero .lede{font-size:16px}
+ .hero .trust-item b{font-size:14px}
+ .hero .trust-item span{font-size:11px}
+}
+@media(max-width:380px){
+ .logo,header.scrolled .brand .logo{height:42px}
+}
+/* Freelance resource enquiry form */
+.contact-intro{max-width:78ch;color:#d4dff5;font-size:16px;line-height:1.7;margin:-8px 0 36px}
+.kontakt .grid form{scroll-margin-top:130px}
+.kontakt form .f-row select{width:100%;background:rgba(255,255,255,.07);border:1px solid #435675;border-radius:7px;color:#fff;padding:13px 14px;font:inherit;font-size:15px;min-height:48px}
+.kontakt form .f-row select option{color:#122039;background:#fff}
+.kontakt form .f-row select:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.kontakt form .topic:focus-visible{outline:2px solid #fff}
+.kontakt .form-status:not(:empty){background:rgba(255,255,255,.08);border-left:3px solid var(--amber);padding:12px 15px;margin:8px 0 2px}
+.kontakt .form-privacy{font-size:12.5px;color:#c7d3ec;line-height:1.6;margin-top:12px}
+.kontakt .form-actions .btn{margin:0}
+@media(max-width:720px){.contact-intro{font-size:15px}.kontakt .form-actions{flex-direction:column;align-items:stretch}.kontakt .form-actions .btn,.kontakt .form-actions .form-copy{width:100%;text-align:center}}
