@@ -382,6 +382,8 @@ textarea{min-height:135px;resize:vertical}
 form .btn-light{border:none;cursor:pointer;font-family:inherit;justify-self:start}
 @media(max-width:900px){.kontakt .grid{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}}
 
+.form-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.form-copy{background:transparent;border:1px solid #91a5c8;border-radius:7px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;padding:12px 16px;cursor:pointer}.form-copy:hover{background:rgba(255,255,255,.09)}.form-status{font-size:13px;color:#cfe2ff;min-height:0}.form-status:empty{display:none}
+
 /* ---------- Motion & moderne detaljer ---------- */
 section[id],#kontakt{scroll-margin-top:112px}
 
@@ -706,6 +708,7 @@ header .wrap{max-width:1240px}
           <li><a href="#metode">Processen</a></li>
           <li><a href="#om">Om os</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="#viden">Viden</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
@@ -734,7 +737,7 @@ header .wrap{max-width:1240px}
         <a class="btn btn-ghost" href="tel:+4570273700">Ring +45 70 27 37 00</a>
       </div>
       <div class="trust-line">
-        <div class="trust-item"><b>20 års erfaring</b><span>selvstændig i Herning siden 2003</span></div>
+        <div class="trust-item"><b>Over 20 års erfaring</b><span>selvstændig i Herning siden 2003</span></div>
         <div class="trust-item"><b>PLC · HMI · Robot</b><span>softwareudvikling som kernefag</span></div>
         <div class="trust-item"><b>Siemens &amp; Beckhoff</b><span>blandt de platforme, vi arbejder med</span></div>
       </div>
@@ -824,10 +827,10 @@ header .wrap{max-width:1240px}
             <rect x="712" y="548" width="290" height="76" rx="10" fill="#0B1328" opacity=".88"/>
             <rect x="712" y="548" width="290" height="76" rx="10" fill="none" stroke="#35476F" stroke-width="1"/>
             <circle class="led-run" cx="738" cy="574" r="6" fill="#3ED27E"/>
-            <text x="756" y="579" class="hud-run">SYSTEM: RUN</text>
-            <text x="734" y="608" class="hud-lbl">TAKT</text>
-            <text x="800" y="609" class="hud-val" id="hudCount">1 248</text>
-            <text x="900" y="608" class="hud-lbl">enh./t</text>
+            <text x="756" y="579" class="hud-run">ILLUSTRATION · IKKE LIVE</text>
+            <text x="734" y="608" class="hud-lbl">PLC</text>
+            <text x="800" y="609" class="hud-val">HMI</text>
+            <text x="900" y="608" class="hud-lbl">SCADA</text>
             <g class="bars">
               <rect class="hb b1" x="950" y="592" width="6" height="14" rx="3" fill="#8FB3FF"/>
               <rect class="hb b2" x="962" y="586" width="6" height="20" rx="3" fill="#8FB3FF"/>
@@ -836,6 +839,7 @@ header .wrap{max-width:1240px}
             </g>
           </g>
         </svg>
+        <figcaption class="fig-caption">Principillustration af en produktionscelle – ikke live produktionsdata.</figcaption>
       </figure>
     </div>
   </div>
@@ -1126,6 +1130,14 @@ header .wrap{max-width:1240px}
   </div>
 </section>
 
+<!-- ============ FAGLIG VIDEN ============ -->
+<section id="viden" style="background:var(--petrol-mist)">
+ <div class="wrap"><div class="sec-head"><span class="label">Viden</span>
+ <h2>Praktiske PLC- og HMI-guides</h2>
+ <p>Faglige tjeklister til maskinbyggere og produktionsvirksomheder, der planlægger softwareændringer.</p></div>
+ <div class="services"><article class="svc"><h3>Tjekliste før en freelance PLC-konsulent starter</h3><p>Afklar projektgrundlag, PLC-versioner, adgang, test og overlevering.</p><a href="/viden/forbered-plc-opgave/" style="font-weight:800">Læs guiden →</a></article><article class="svc"><h3>WinCC-alarmer og recepter</h3><p>Gennemgå alarm-ID'er, PLC-signaler, operatørtekster og test.</p><a href="/viden/wincc-alarmer/" style="font-weight:800">Læs guiden →</a></article></div>
+ <p style="margin-top:24px"><a href="/viden/" style="font-weight:800">Se alle guides →</a></p>
+ </div></section>
 <!-- ============ KONTAKT ============ -->
 <section class="kontakt" id="kontakt">
   <div class="wrap">
@@ -1197,8 +1209,10 @@ header .wrap{max-width:1240px}
           <label for="besked">Beskriv opgaven *</label>
           <textarea id="besked" name="besked" required placeholder="Vælg et emne ovenfor for at få en starttekst, eller skriv frit. Platform, anlægstype og hvad der skal løses er en god start."></textarea>
         </div>
-        <button class="btn btn-light" type="submit">Book en gennemgang</button>
-        <p class="form-note">Beskeden åbner i jeres mailprogram, klar til at sende. I kan også ringe direkte på +45 70 27 37 00.</p>
+        <div class="form-actions"><button class="btn btn-light" type="submit">Åbn e-mailkladde</button>
+ <button class="form-copy" type="button" onclick="copyEnquiry(this.form)">Kopiér henvendelse</button></div>
+ <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">E-mailkladden sendes først, når I selv trykker Send. Har I ikke et mailprogram, kan I kopiere henvendelsen og maile til info@consults.dk.</p>
       </form>
     </div>
   </div>
@@ -1246,12 +1260,12 @@ const spyIO = new IntersectionObserver(entries => {
     }
   });
 }, {rootMargin:'-35% 0px -55% 0px'});
-['ydelser','arbejde','metode','om','faq'].forEach(id => {
+['ydelser','arbejde','metode','om','faq','viden'].forEach(id => {
   const el = document.getElementById(id);
   if (el) spyIO.observe(el);
 });
 
-// BEKRÆFT: udskift med virksomhedens rigtige e-mailadresse inden publicering
+// Business contact address displayed on this website
 const CONTACT_EMAIL = "info@consults.dk";
 
 function toggleMenu(btn){
@@ -1288,32 +1302,55 @@ document.querySelectorAll('.topic').forEach(btn => {
 });
 
 
-// Live tæller i hero-overlayet
-(function(){
-  var el = document.getElementById('hudCount');
-  if (!el) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var n = 1248;
-  setInterval(function(){
-    n += 1 + Math.floor(Math.random()*2);
-    el.textContent = n.toLocaleString('da-DK').replace(/\./g,' ');
-  }, 1400);
-})();
 
-function sendMail(f){
-  const emne = f.emne.value ? f.emne.value + ', ' : '';
-  const s = encodeURIComponent('Gennemgang: ' + emne + f.firma.value);
-  const b = encodeURIComponent(
-    'Firma: ' + f.firma.value + '\n' +
-    'Navn: ' + f.navn.value + '\n' +
-    'E-mail: ' + f.email.value + '\n' +
-    'Telefon: ' + (f.tlf.value || 'ikke oplyst') + '\n' +
-    'Emne: ' + (f.emne.value || 'Ikke angivet') + '\n\n' +
-    f.besked.value
-  );
-  window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + s + '&body=' + b;
-  return false;
+
+function getEnquiry(f) {
+ const d = new FormData(f);
+ const firm = String(d.get('firma') || '').trim();
+ const topic = String(d.get('emne') || '').trim();
+ const subject = 'Gennemgang: ' + (topic ? topic + ' – ' : '') + firm;
+ const body = [
+  'Firma: ' + firm,
+  'Navn: ' + String(d.get('navn') || '').trim(),
+  'E-mail: ' + String(d.get('email') || '').trim(),
+  'Telefon: ' + (String(d.get('tlf') || '').trim() || 'ikke oplyst'),
+  'Emne: ' + (topic || 'Ikke angivet'),
+  '', String(d.get('besked') || '').trim()
+ ].join('\n');
+ return {subject,body};
 }
+function sendMail(f) {
+ if (!f.reportValidity()) return false;
+ const {subject,body} = getEnquiry(f);
+ window.location.href = 'mailto:' + CONTACT_EMAIL +
+  '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+ return false;
+}
+async function copyEnquiry(f) {
+ if (!f.reportValidity()) return;
+ const {subject,body} = getEnquiry(f);
+ const content = 'To: ' + CONTACT_EMAIL + '\nSubject: ' + subject + '\n\n' + body;
+ const status = document.getElementById('form-status');
+ try {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+   await navigator.clipboard.writeText(content);
+  } else {
+   const temp = document.createElement('textarea');
+   temp.value = content;
+   temp.style.position = 'fixed';
+   temp.style.opacity = '0';
+   document.body.appendChild(temp);
+   temp.select();
+   const copied = document.execCommand('copy');
+   temp.remove();
+   if (!copied) throw new Error('Clipboard unavailable');
+  }
+  status.textContent = 'Kopieret. Indsæt teksten i en e-mail til info@consults.dk, og send den.';
+ } catch (_) {
+  status.textContent = 'Kunne ikke kopiere. Skriv direkte til info@consults.dk.';
+ }
+}
+
 </script>
 
 
