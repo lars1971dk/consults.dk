@@ -382,6 +382,8 @@ textarea{min-height:135px;resize:vertical}
 form .btn-light{border:none;cursor:pointer;font-family:inherit;justify-self:start}
 @media(max-width:900px){.kontakt .grid{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}}
 
+.form-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.form-copy{background:transparent;border:1px solid #91a5c8;border-radius:7px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;padding:12px 16px;cursor:pointer}.form-copy:hover{background:rgba(255,255,255,.09)}.form-status{font-size:13px;color:#cfe2ff;min-height:0}.form-status:empty{display:none}
+
 /* ---------- Motion & moderne detaljer ---------- */
 section[id],#kontakt{scroll-margin-top:112px}
 
@@ -706,6 +708,7 @@ header .wrap{max-width:1240px}
           <li><a href="#metode">The process</a></li>
           <li><a href="#om">About</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="#viden">Insights</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
@@ -734,7 +737,7 @@ header .wrap{max-width:1240px}
         <a class="btn btn-ghost" href="tel:+4570273700">Call +45 70 27 37 00</a>
       </div>
       <div class="trust-line">
-        <div class="trust-item"><b>20 years of experience</b><span>self-employed in Herning since 2003</span></div>
+        <div class="trust-item"><b>Over 20 years of experience</b><span>self-employed in Herning since 2003</span></div>
         <div class="trust-item"><b>PLC · HMI · Robot</b><span>software development as our core discipline</span></div>
         <div class="trust-item"><b>Siemens &amp; Beckhoff</b><span>among the platforms we work with</span></div>
       </div>
@@ -824,10 +827,10 @@ header .wrap{max-width:1240px}
             <rect x="712" y="548" width="290" height="76" rx="10" fill="#0B1328" opacity=".88"/>
             <rect x="712" y="548" width="290" height="76" rx="10" fill="none" stroke="#35476F" stroke-width="1"/>
             <circle class="led-run" cx="738" cy="574" r="6" fill="#3ED27E"/>
-            <text x="756" y="579" class="hud-run">SYSTEM: RUN</text>
-            <text x="734" y="608" class="hud-lbl">RATE</text>
-            <text x="800" y="609" class="hud-val" id="hudCount">1 248</text>
-            <text x="900" y="608" class="hud-lbl">units/h</text>
+            <text x="756" y="579" class="hud-run">ILLUSTRATION · NOT LIVE</text>
+            <text x="734" y="608" class="hud-lbl">PLC</text>
+            <text x="800" y="609" class="hud-val">HMI</text>
+            <text x="900" y="608" class="hud-lbl">SCADA</text>
             <g class="bars">
               <rect class="hb b1" x="950" y="592" width="6" height="14" rx="3" fill="#8FB3FF"/>
               <rect class="hb b2" x="962" y="586" width="6" height="20" rx="3" fill="#8FB3FF"/>
@@ -836,6 +839,7 @@ header .wrap{max-width:1240px}
             </g>
           </g>
         </svg>
+        <figcaption class="fig-caption">Illustrative production-cell diagram – not live production data.</figcaption>
       </figure>
     </div>
   </div>
@@ -1126,6 +1130,14 @@ header .wrap{max-width:1240px}
   </div>
 </section>
 
+<!-- ============ FAGLIG VIDEN ============ -->
+<section id="viden" style="background:var(--petrol-mist)">
+ <div class="wrap"><div class="sec-head"><span class="label">Insights</span>
+ <h2>Practical PLC and HMI checklists</h2>
+ <p>Technical guides for machine builders and manufacturers planning software changes.</p></div>
+ <div class="services"><article class="svc"><h3>Checklist before engaging a freelance PLC engineer</h3><p>Plan the technical baseline, access, testing and handover before the work starts.</p><a href="/en/insights/prepare-plc-project/" style="font-weight:800">Read guide →</a></article><article class="svc"><h3>WinCC alarms and recipes</h3><p>Review alarm IDs, PLC tags, operator messages, recipes and validation.</p><a href="/en/insights/wincc-alarm-review/" style="font-weight:800">Read guide →</a></article></div>
+ <p style="margin-top:24px"><a href="/en/insights/" style="font-weight:800">Browse all guides →</a></p>
+ </div></section>
 <!-- ============ KONTAKT ============ -->
 <section class="kontakt" id="kontakt">
   <div class="wrap">
@@ -1197,8 +1209,10 @@ header .wrap{max-width:1240px}
           <label for="besked">Describe the task *</label>
           <textarea id="besked" name="besked" required placeholder="Choose a topic above to get a starting text, or write freely. Platform, plant type and what needs solving is a good start."></textarea>
         </div>
-        <button class="btn btn-light" type="submit">Book a review</button>
-        <p class="form-note">The message opens in your email client, ready to send. You can also call us directly on +45 70 27 37 00.</p>
+        <div class="form-actions"><button class="btn btn-light" type="submit">Open email draft</button>
+ <button class="form-copy" type="button" onclick="copyEnquiry(this.form)">Copy enquiry</button></div>
+ <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">An email draft must be sent manually. No email client? Copy the enquiry and email info@consults.dk. You can also call us.</p>
       </form>
     </div>
   </div>
@@ -1246,12 +1260,12 @@ const spyIO = new IntersectionObserver(entries => {
     }
   });
 }, {rootMargin:'-35% 0px -55% 0px'});
-['ydelser','arbejde','metode','om','faq'].forEach(id => {
+['ydelser','arbejde','metode','om','faq','viden'].forEach(id => {
   const el = document.getElementById(id);
   if (el) spyIO.observe(el);
 });
 
-// BEKRÆFT: udskift med virksomhedens rigtige e-mailadresse inden publicering
+// Business contact address displayed on this website
 const CONTACT_EMAIL = "info@consults.dk";
 
 function toggleMenu(btn){
@@ -1288,32 +1302,55 @@ document.querySelectorAll('.topic').forEach(btn => {
 });
 
 
-// Live tæller i hero-overlayet
-(function(){
-  var el = document.getElementById('hudCount');
-  if (!el) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var n = 1248;
-  setInterval(function(){
-    n += 1 + Math.floor(Math.random()*2);
-    el.textContent = n.toLocaleString('da-DK').replace(/\./g,' ');
-  }, 1400);
-})();
 
-function sendMail(f){
-  const emne = f.emne.value ? f.emne.value + ', ' : '';
-  const s = encodeURIComponent('Review request: ' + emne + f.firma.value);
-  const b = encodeURIComponent(
-    'Company: ' + f.firma.value + '\n' +
-    'Name: ' + f.navn.value + '\n' +
-    'Email: ' + f.email.value + '\n' +
-    'Phone: ' + (f.tlf.value || 'not provided') + '\n' +
-    'Topic: ' + (f.emne.value || 'Not specified') + '\n\n' +
-    f.besked.value
-  );
-  window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + s + '&body=' + b;
-  return false;
+
+function getEnquiry(f) {
+ const d = new FormData(f);
+ const firm = String(d.get('firma') || '').trim();
+ const topic = String(d.get('emne') || '').trim();
+ const subject = 'Review request: ' + (topic ? topic + ' – ' : '') + firm;
+ const body = [
+  'Company: ' + firm,
+  'Name: ' + String(d.get('navn') || '').trim(),
+  'Email: ' + String(d.get('email') || '').trim(),
+  'Phone: ' + (String(d.get('tlf') || '').trim() || 'not provided'),
+  'Topic: ' + (topic || 'Not specified'),
+  '', String(d.get('besked') || '').trim()
+ ].join('\n');
+ return {subject,body};
 }
+function sendMail(f) {
+ if (!f.reportValidity()) return false;
+ const {subject,body} = getEnquiry(f);
+ window.location.href = 'mailto:' + CONTACT_EMAIL +
+  '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+ return false;
+}
+async function copyEnquiry(f) {
+ if (!f.reportValidity()) return;
+ const {subject,body} = getEnquiry(f);
+ const content = 'To: ' + CONTACT_EMAIL + '\nSubject: ' + subject + '\n\n' + body;
+ const status = document.getElementById('form-status');
+ try {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+   await navigator.clipboard.writeText(content);
+  } else {
+   const temp = document.createElement('textarea');
+   temp.value = content;
+   temp.style.position = 'fixed';
+   temp.style.opacity = '0';
+   document.body.appendChild(temp);
+   temp.select();
+   const copied = document.execCommand('copy');
+   temp.remove();
+   if (!copied) throw new Error('Clipboard unavailable');
+  }
+  status.textContent = 'Copied. Paste into an email to info@consults.dk, then send it.';
+ } catch (_) {
+  status.textContent = 'Unable to copy. Please write to info@consults.dk directly.';
+ }
+}
+
 </script>
 
 
