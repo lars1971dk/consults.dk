@@ -4,3 +4,9 @@
 
 /* Technical guides and insights hub */
 .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:48px;align-items:start}.article-body{max-width:78ch;line-height:1.8}.article-body h2{font-size:clamp(22px,2.6vw,29px);margin:38px 0 13px}.article-body p{margin:0 0 18px}.article-body ul{padding-left:24px;display:grid;gap:9px;margin:12px 0 30px}.article-meta{font-size:13px;color:#65707b;margin-top:22px}.article-note{border-left:4px solid var(--orange);background:var(--pale);padding:20px 23px;margin:26px 0;border-radius:0 8px 8px 0}.article-sample{background:var(--pale);border:1px solid var(--line);padding:23px;border-radius:10px;margin-top:36px}.article-sample h2{margin:0 0 15px}.article-sample ul{margin-bottom:0}.article-aside{position:sticky;top:24px}.article-aside h2{font-size:22px}.article-aside a{font-weight:800}.hub-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.hub-cards h2{font-size:25px}.hub-cards .card a{font-weight:800}@media(max-width:880px){.article-layout{grid-template-columns:1fr}.article-aside{position:static}.hub-cards{grid-template-columns:1fr}}
+
+/* Stronger original CONSULTS branding, aligned with homepage Option A */
+.header .wrap{max-width:1450px}
+.header .logo{width:min(340px,58vw);height:auto}
+@media(max-width:880px){.header .logo{width:min(275px,64vw)}}
+@media(max-width:520px){.header .logo{width:min(235px,60vw)}}
