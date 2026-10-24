@@ -12,11 +12,12 @@ const pages = [
  'plc-fejlfinding/index.html','en/plc-troubleshooting/index.html',
  'viden/index.html','en/insights/index.html',
  'viden/forbered-plc-opgave/index.html','en/insights/prepare-plc-project/index.html',
- 'viden/wincc-alarmer/index.html','en/insights/wincc-alarm-review/index.html'
+ 'viden/wincc-alarmer/index.html','en/insights/wincc-alarm-review/index.html',
+ 'viden/beckhoff-twincat-softwareaendringer/index.html','en/insights/beckhoff-twincat-software-changes/index.html'
 ];
 const sitemap = read('sitemap.xml');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
-assert.equal(locations.length,14,'Sitemap must contain 14 URLs');
+assert.equal(locations.length,16,'Sitemap must contain 16 URLs');
 assert.equal(new Set(locations).size,14,'Sitemap URLs must be unique');
 const expectedUrl = path=>'https://consults.dk/'+path.replace(/index\.html$/,'');
 for(const path of pages){
