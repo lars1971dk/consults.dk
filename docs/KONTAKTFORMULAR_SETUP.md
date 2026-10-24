@@ -1,47 +1,67 @@
-# CONSULTS.dk – layout, logo og direkte kontakt
+# CONSULTS.dk – kontaktformular med valgfri kundekopi
+
 Opdateret: 24. oktober 2026.
 
-## Valgt design og afgrænsning
-Det oprindelige centrerede layout er bevaret. Den fravalgte split-hero fra Design A er fjernet,
-og `assets/option-a.css` er slettet. Logoet er nu `assets/logo-clean.svg`, et hvidt,
-vektorskarpt logo uden glød, blur eller skygge. Det anvendes på forside, ydelsessider,
-videnssider og i begge sprogversioner.
+## Afsender og modtager
 
-## Kontakt – samme løsning som SOLIDTEC.dk
-Hjemmesiden indsender kontaktformularen via HTTPS POST til den eksisterende
-serverless SMTP-tjeneste:
-`https://solidtecdk-statistics-service.vercel.app/api/contact`.
+Den tilsigtede opsætning for CONSULTS.dk er:
+- **Fra:** CONSULTS <info@consults.dk>
+- **Til:** info@consults.dk
+- **Svar-til:** den adresse, som kunden indtaster
 
-Tjenesten er hostet på Vercel i projektet `solidtec.dk-statistics-service`
-(backend-kode: `lars1971dk/solidtec.dk/statistics-service`).
-Kun de præcist godkendte oprindelser får adgang:
-`https://solidtec.dk`, `https://www.solidtec.dk`,
-`https://consults.dk` og `https://www.consults.dk`.
-Dashboardets særskilte adgangskontrol er uændret.
+Den eksisterende Vercel-kontaktservice bruges stadig:
+`https://solidtecdk-statistics-service.vercel.app/api/contact`
 
-Modtagere bestemmes **kun på serveren**:
-- SOLIDTEC.dk: den eksisterende `CONTACT_RECIPIENT_EMAIL`
-  (standard `lt@solidtec.dk`).
-- CONSULTS.dk: `CONSULTS_CONTACT_RECIPIENT_EMAIL`
-  (standard `info@consults.dk`).
+Serveren vælger mailkonto og modtager ud fra et præcist tilladt website-Origin.
+SOLIDTEC.dk bruger fortsat sine eksisterende SMTP-oplysninger og sin mailadresse.
 
-SMTP-afsenderen er stadig den eksisterende SOLIDTEC-mailkonto. Dette er tilsigtet:
-CONSULTS-mailen er **modtager**, ikke ny SMTP-login. Kundens adresse sættes som
-`Reply-To`. Hvis der senere ønskes afsendelse fra `info@consults.dk`, kræver det en
-godkendt, separat SMTP-konfiguration; ingen afsenderdomæner spoofes.
+### Vigtig engangsopsætning, der mangler
 
-API'et kontrollerer felter, skjult spamfelt, oprindelse og særskilt
-rate limiting pr. website. Brugerfladen viser først *sendt*, når API'et returnerer
-succes efter SMTP-leveringsforsøg. Ved fejl bevares input og
-`Kopiér henvendelse` fungerer fortsat.
+One.com kræver SMTP-godkendelse med den rigtige afsender-mailkonto.
+For CONSULTS skal følgende konfigureres **sikkert i Vercels Production environment**:
+- `CONSULTS_SMTP_USER=info@consults.dk` (eller udelades; standard er denne adresse).
+- `CONSULTS_SMTP_PASSWORD` = adgangskoden til den aktive mailbox på one.com, som
+  en **Sensitive** environment variable. Den må **aldrig** deles i chat eller GitHub.
+- Host og port arves fra de eksisterende SMTP-indstillinger (`send.one.com:465`).
+  Hvis CONSULTS bruger en anden mailhost, indstilles også `CONSULTS_SMTP_HOST` og
+  `CONSULTS_SMTP_PORT`.
 
-## Verifikation
-- Automatiske offline-tjek: `node tests/consults-site-check.mjs`.
-- Backend: test suite `statistics-service/test-contact.mjs` i SOLIDTEC-repositoriet.
-- Vercel produktion: deployment til kontakt-API'et bekræftet READY efter PR #11.
-- GitHub Pages: udrulning af CONSULTS PR #6 bekræftet SUCCESS.
-- Reelt end-to-end modtagelsescheck er **endnu ikke bekræftet**. Test én kort
-  henvendelse fra `https://consults.dk/` og kontrollér indbakke/spam under
-  `info@consults.dk`. Uden adgang til mailbox må vi ikke erklære modtagelsen bekræftet.
+Før den særskilte adgangskode er konfigureret, benytter den eksisterende API fortsat
+Solidtecs fungerende SMTP-konto som midlertidig afsender til intern modtagelse.
+Dette er **ikke** den ønskede endelige afsenderidentitet. Brugeren kan ikke få en
+automatisk mailkopi fra korrekt CONSULTS-afsender før mailboxen er tilsluttet.
+Efter ændring af miljøvariabel skal Vercel produktionen genudrulles.
 
-Ingen ekstra formularleverandør, nye SMTP-hemmeligheder eller betalt tjeneste er nødvendig.
+## Kundevenligt kontaktflow
+
+- Kontaktformularen findes på dansk og engelsk og bevarer det oprindelige layout.
+- Kunden kan sætte et **ikke-forhåndsvalgt** kryds i »Send mig en kopi«.
+- Forespørgslen sendes først til CONSULTS. Hvis kopi er valgt, forsøges den sendt
+  som en selvstændig kvitteringsmail til kundens egen e-mailadresse.
+- Afsender i kundekopien er CONSULTS <info@consults.dk> og Reply-To peger samme sted.
+- Hvis intern levering lykkes men kundekopien fejler, modtager browseren
+  `{ok:true,copyRequested:true,copySent:false}`. Formularen bevares, så
+  kunden kan kopiere teksten; vi forsøger ikke at gensende intern mail automatisk.
+- Fejl i intern afsendelse fører aldrig til en falsk succesbesked.
+
+## E-maildesign
+
+CONSULTS' mails på dansk og engelsk har en enkel responsive HTML-skabelon med:
+- mørk marineblå overskrift, hvidt CONSULTS-navn og orange accentstreg;
+- tydelig emneoverskrift og oversigt over virksomhed, navn, e-mail, telefon og emne;
+- læsevenlig blok med kundens opgavebeskrivelse og en egentlig svarknap;
+- separat takkekvittering til kunden, i stedet for CC i den interne mail;
+- almindelig tekstversion som fallback.
+
+Kundens input HTML-escapes før visning, så f.eks. `<script>` vises som tekst.
+
+## Tests og afgrænsning
+
+- Offline-regressionstest: `node tests/consults-site-check.mjs`.
+- Backend-tests: `node --test statistics-service/test-contact.mjs` fra
+  SOLIDTEC-repositoryets projektmappe.
+- Ingen ekstra formularleverandør, marketingtracking eller betalt mailtjeneste.
+- Skal kontrolleres med mindst én ægte testmail **efter** `CONSULTS_SMTP_PASSWORD`
+  er sat, inklusive hvilken From-adresse mailklienten faktisk viser.
+- Den eneste brugerhandling, som ikke kan automatiseres sikkert her, er at
+  oprette den beskyttede SMTP-adgangskode i Vercel.
