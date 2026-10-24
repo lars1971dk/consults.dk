@@ -42,10 +42,12 @@ async function verifyForm(path,locale){
  const html=read(path);
  assert(!html.includes('option-a.css'),path+' original centered layout');
  assert(html.includes('class="hero-copy"')&&html.includes('class="hero-fig"'),path+' original hero');
- for(const field of ['firma','navn','email','tlf','emne','besked','website']){
+ for(const field of ['firma','navn','email','tlf','emne','besked','website','copyToSender']){
   assert(html.includes('name="'+field+'"'),path+' required field '+field);
  }
- assert(html.includes('onclick="copyEnquiry(this.form)"'),path+' copy fallback');
+ assert(html.includes('onclick="copyEnquiry(this.form)"'),path+' manual copy fallback');
+ assert(html.includes('type="checkbox" value="yes"'),path+' opt-in checkbox exists');
+ assert(!html.includes('type="checkbox" value="yes" checked'),path+' opt-in must not default on');
  assert(html.includes('role="status"')&&html.includes('aria-live="polite"'),path+' status accessibility');
  const source = html.match(/<script>([\s\S]*?)<\/script>/)?.[1];
  assert(source,path+' inline script');
@@ -64,38 +66,58 @@ async function verifyForm(path,locale){
  const form={
   values:{
    firma:'Factory A/S',navn:'Test Contact',email:'test@example.com',tlf:'',
-   emne:'PLC software',besked:'Please help with a Siemens PLC project.',website:''
+   emne:'PLC software',besked:'Please help with a Siemens PLC project.',
+   website:'',copyToSender:''
   },
   reportValidity:()=>true,
   querySelector:()=>button,
-  reset(){this.didReset=true;}
+  reset(){this.resetCount=(this.resetCount||0)+1;}
  };
- let responseIsOk=true, sent;
+ let responseIsOk=true;
+ let serverResult={ok:true,copyRequested:false,copySent:false};
+ let sent;
  const transport=async(url,options)=>{
   sent={url,options};
-  return responseIsOk?{ok:true,json:async()=>({ok:true})}:{ok:false,json:async()=>({ok:false})};
+  return responseIsOk
+    ?{ok:true,json:async()=>serverResult}
+    :{ok:false,json:async()=>({ok:false})};
  };
  const functions=new Function('FormData','fetch','document','navigator','CONTACT_EMAIL',
   contact+'\nreturn {submitEnquiry,copyEnquiry};'
  )(MockFormData,transport,document,{clipboard},'info@consults.dk');
+ // Default: owner receives enquiry, no customer copy.
  await functions.submitEnquiry(form);
  assert.equal(sent.url,'https://solidtecdk-statistics-service.vercel.app/api/contact',path+' shared SMTP API');
  assert.equal(sent.options.method,'POST');
- const payload=JSON.parse(sent.options.body);
+ let payload=JSON.parse(sent.options.body);
  assert.equal(payload.lang,locale,path+' language route');
  assert.equal(payload.email,'test@example.com');
  assert.equal(payload.firma,'Factory A/S');
- assert(form.didReset===true,path+' success clears form');
+ assert.equal(payload.copyToSender,false,path+' default is off');
+ assert.equal(form.resetCount,1,path+' success clears form');
  assert.match(status.textContent,/sent|sendt/i,path+' success feedback');
- responseIsOk=false;
- form.didReset=false;
+ // Opt-in: copy is delivered after owner mail.
+ form.values.copyToSender='yes';
+ serverResult={ok:true,copyRequested:true,copySent:true};
  await functions.submitEnquiry(form);
- assert.equal(form.didReset,false,path+' failed submission retains data');
+ payload=JSON.parse(sent.options.body);
+ assert.equal(payload.copyToSender,true,path+' opt-in included in payload');
+ assert.equal(form.resetCount,2,path+' owner+copy success clears form');
+ assert.match(status.textContent,/copy was sent|kopi er sendt/i,path+' customer copy feedback');
+ // Owner succeeds, but copy fails: no duplicate-provoking server failure.
+ serverResult={ok:true,copyRequested:true,copySent:false};
+ await functions.submitEnquiry(form);
+ assert.equal(form.resetCount,2,path+' partial failure retains fields');
+ assert.match(status.textContent,/could not|kunne ikke/i,path+' copy failure feedback');
+ await functions.copyEnquiry(form);
+ assert(messages.some(s=>s.includes('To: info@consults.dk')),path+' manual copy fallback');
+ // Owner delivery fails entirely: fields remain intact.
+ responseIsOk=false;
+ await functions.submitEnquiry(form);
+ assert.equal(form.resetCount,2,path+' failed submission retains data');
  assert.match(status.textContent,/could not|kunne ikke/i,path+' error feedback');
  assert.equal(button.disabled,false,path+' re-enable button');
- await functions.copyEnquiry(form);
- assert(messages.some(s=>s.includes('To: info@consults.dk')),path+' copy fallback');
 }
 await verifyForm('index.html','da');
 await verifyForm('en/index.html','en');
-console.log('CONSULTS checks passed: 14 pages, restored layout, clean logo and bilingual contact flow.');
+console.log('CONSULTS checks passed: 14 pages, original layout, crisp logo, bilingual optional copy and error recovery.');
